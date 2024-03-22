@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Resizer</title>
+</head>
+<body>
+  <h1>Upload Image to Resize</h1>
+  <form id="resizeForm" action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="image" id="imageUpload" required>
+    <input type="number" name="width" placeholder="Width" required>
+    <input type="number" name="height" placeholder="Height" required>
+    <input type="checkbox" name="lockAspectRatio" id="lockAspectRatio">
+    <label for="lockAspectRatio">Lock aspect ratio</label>
+    <button type="submit">Upload Image and Resize</button>
+  </form>
+  <img id="imagePreview" src="" alt="Image Preview..." style="max-width: 200px; max-height: 200px;">
+  <script>
+    document.getElementById('imageUpload').addEventListener('change', function(event) {
+      var reader = new FileReader();
+      reader.onload = function() {
+        var output = document.getElementById('imagePreview');
+        output.src = reader.result;
+        output.style.display = 'block';
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    });
+  </script>
+</body>
+</html>
